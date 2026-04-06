@@ -17,6 +17,7 @@ import WaitlistDashboard from "./pages/WaitlistDashboard";
 import AdminLogin from "./pages/AdminLogin";
 
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function App() {
 
   return (
     <>
-
+      <Analytics />
       <Toaster
         position="top-right"
         toastOptions={{
