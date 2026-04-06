@@ -7,7 +7,9 @@ export default function AdminLogin() {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const res = await fetch("http://localhost:4000/api/admin-login", {
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+        const res = await fetch(`${API_BASE}/api/admin-login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
