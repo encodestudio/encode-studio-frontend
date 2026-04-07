@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function AdminLogin() {
     const [email, setEmail] = useState("");
@@ -7,30 +8,40 @@ export default function AdminLogin() {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const API_BASE = import.meta.env.VITE_API_BASE_URL;
-
-        const res = await fetch(`${API_BASE}/api/admin-login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        });
-
-        const text = await res.text();   // 👈 change this
-        console.log("RAW RESPONSE:", text);
-
         try {
-            const data = JSON.parse(text);
+            const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+            const res = await fetch(`${API_BASE}/api/admin-login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const text = await res.text();
+            console.log("RAW RESPONSE:", text);
+
+            let data = {};
+            try {
+                data = JSON.parse(text);
+            } catch (err) {
+                console.error("JSON ERROR:", err);
+                toast.error("Invalid server response");
+                return;
+            }
 
             if (res.ok) {
                 localStorage.setItem("token", data.token);
+                toast.success("Login successful 🚀");
                 navigate("/dashboard");
             } else {
-                alert(data.message);
+                toast.error(data.message || "Invalid credentials ❌");
             }
-        } catch (err) {
-            console.error("JSON ERROR:", err);
+
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error("Something went wrong. Please try again.");
         }
     };
 
