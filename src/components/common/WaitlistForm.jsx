@@ -13,7 +13,8 @@ export default function WaitlistForm({ productName }) {
         setLoading(true);
 
         try {
-            const res = await fetch("http://localhost:4000/api/waitlist", {
+            const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+            const res = await fetch(`${API_BASE}/api/waitlist`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
