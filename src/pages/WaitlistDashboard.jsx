@@ -25,7 +25,7 @@ export default function WaitlistDashboard() {
         if (!token) navigate("/admin-login");
     }, []);
 
-    const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+    const API_BASE = import.meta.env.VITE_API_BASE_URL;
     const [data, setData] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [debouncedSearch, setDebouncedSearch] = useState("");
