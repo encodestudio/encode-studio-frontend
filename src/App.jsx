@@ -17,7 +17,7 @@ import WaitlistDashboard from "./pages/WaitlistDashboard";
 import AdminLogin from "./pages/AdminLogin";
 
 import { Toaster } from "react-hot-toast";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const location = useLocation();

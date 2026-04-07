@@ -14,7 +14,7 @@ import {
     Legend
 } from "recharts";
 import toast from "react-hot-toast";
-import { Analytics } from "@vercel/analytics/next"
+// import { Analytics } from '@vercel/analytics/react';
 
 export default function WaitlistDashboard() {
     const navigate = useNavigate();
